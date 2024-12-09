@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Ashton Johnson, CS535, Project #6</title>
+
+<img id = "wallPic" src = "brick.jpg" hidden />
+<img id = "windowPic" src = "window.jpg" hidden />
+<img id = "hellPic" src = "hell.png" hidden />
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+attribute  vec2 vTexCoord;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+varying vec4 fColor;
+varying vec2 fTexCoord;
+
+void main() 
+{    
+    // pass over color and texCoord, then calculate position
+    fColor = vColor;
+    fTexCoord = vTexCoord;
+    gl_Position = projectionMatrix*modelViewMatrix*vPosition;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+   
+varying vec4 fColor;
+varying  vec2 fTexCoord;
+
+uniform sampler2D texture;
+
+void
+main()
+{
+    // if fragment matches the green color for the chroma key, then set alpha to zero, else use texture
+    if(texture2D( texture, fTexCoord ).r <= 0.1 && texture2D( texture, fTexCoord ).g >= 0.9 && texture2D( texture, fTexCoord ).b <= 0.1){
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+    } else{
+        gl_FragColor = texture2D( texture, fTexCoord );
+    }
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="blending.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+   
+<br/>
+
+<p>Use the arrow keys to see what else is outside.</p>
+
+</body>
+</html>
