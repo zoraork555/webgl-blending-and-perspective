@@ -14,4 +14,4 @@ The three jpg files are the assets used in the project
 Common folder contains the code from Ed Angel that helps set up and run the WebGL code  
 
 ## Running
-Download all files as they are stored in the repository and then open the HTML file in your browser  
+Download all files as they are stored in the repository. I then run a local server using Servez, a free program, and run the file containing the project. In the Servez window I open the localhost link, and then open blending.html through the localhost tab. The project should now be running.
