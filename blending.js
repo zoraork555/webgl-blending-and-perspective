@@ -1,5 +1,3 @@
-// Ashton Johnson, CS535, Project #6
-// 
 // This program creates an environment to observe.
 // This environment consists of three walls, one to each side and one in front.
 // There is also a floor. On the wall in front there is a window.
